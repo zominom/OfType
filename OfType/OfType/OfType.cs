@@ -6,7 +6,7 @@ namespace OfType
     {
         public IEnumerable<T> GetOfType<T>(IEnumerable enumerable)
         {
-            foreach (var item in enumerable)
+            foreach (IEnumerable item in enumerable)
             {
                 if (item is T itemAsT)
                 {
