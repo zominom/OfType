@@ -6,7 +6,13 @@ namespace OfType
     {
         public IEnumerable<T> GetOfType<T>(IEnumerable enumerable)
         {
-            return enumerable.OfType<T>();
+            foreach (var item in enumerable)
+            {
+                if (item is T itemAsT)
+                {
+                    yield return itemAsT;
+                }
+            }
         }
 
         public IEnumerable<TOutput> GetOfType<TSource, TOutput>(IEnumerable<TSource> enumerable)
@@ -16,7 +22,7 @@ namespace OfType
 
         public IEnumerable<TBase> OfBase<TBase, TDerived>(IEnumerable<TDerived> derivedItems) where TDerived : TBase
         {
-            return derivedItems.Where(item => item != null && item.GetType() == typeof(TBase)).Cast<TBase>();
+            return (IEnumerable<TBase>)derivedItems;
         }
     }
 }
