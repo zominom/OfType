@@ -22,7 +22,7 @@ namespace OfType
 
         public IEnumerable<TBase> OfBase<TBase, TDerived>(IEnumerable<TDerived> derivedItems) where TDerived : TBase
         {
-            return (IEnumerable<TBase>)derivedItems;
+            return derivedItems?.Cast<TBase>() ?? Enumerable.Empty<TBase>();
         }
     }
 }
